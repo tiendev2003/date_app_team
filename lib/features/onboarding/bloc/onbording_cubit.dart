@@ -219,7 +219,7 @@ class OnbordingCubit extends Cubit<OnbordingState> {
               .sendTag("user_id", response.data["UserLogin"]["id"].toString());
           setUpFirebase(context,
               email: response.data["UserLogin"]["email"],
-              uid: response.data["UserLogin"]["id"],
+              uid: response.data["UserLogin"]["id"].toString(),
               proPic: response.data["UserLogin"]["profile_pic"]
                   .toString()
                   .split("\$;")

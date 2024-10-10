@@ -16,7 +16,7 @@ class Api {
       responseBody: true,
     ));
     // sau 5s se huy request
-    _dio.options.receiveTimeout = const Duration(seconds: 5);
+
     
   }
 

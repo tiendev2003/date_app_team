@@ -1,5 +1,6 @@
 import 'dart:io';
 
+
 import 'package:date_app_team/core/config/config.dart';
 import 'package:date_app_team/core/language/localization/app_localization.dart';
 import 'package:date_app_team/core/model/interest_model.dart';
@@ -70,8 +71,9 @@ class _EditScreenState extends State<EditScreen> {
   late EditProfileProvider editProvider;
   @override
   Widget build(BuildContext context) {
+
     editProvider = Provider.of<EditProfileProvider>(context);
-    return Scaffold(
+     return Scaffold(
         appBar: AppBar(
           surfaceTintColor: Colors.transparent,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -308,7 +310,8 @@ class _EditScreenState extends State<EditScreen> {
                                         ?.translate("Mobile Number") ??
                                     "Mobile Number",
                                 widget: IntlPhoneField(
-                                  initialCountryCode: editProvider.ccode.toString(),
+                                  initialCountryCode: "VN",
+
                                   keyboardType: TextInputType.number,
                                   cursorColor: Colors.black,
                                   showCountryFlag: false,
@@ -379,8 +382,7 @@ class _EditScreenState extends State<EditScreen> {
                                 ),
                                 traing: true),
 
-                            // commenTile(titile: "Password".tr, widget: TextFieldPro(
-                            commenTile(
+                             commenTile(
                                 titile: AppLocalizations.of(context)
                                         ?.translate("Password") ??
                                     "Password",

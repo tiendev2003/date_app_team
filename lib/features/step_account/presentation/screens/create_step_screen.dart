@@ -503,9 +503,8 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
           ),
           const SizBoxH(size: 0.02),
           IntlPhoneField(
-            initialCountryCode: "VI",
+            initialCountryCode: "VN",
             keyboardType: TextInputType.number,
-
             cursorColor: Colors.black,
             showCountryFlag: false,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],

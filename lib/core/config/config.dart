@@ -9,7 +9,7 @@ class Config {
 
   static const String firebaseKey = 'AIzaSyAu5p1Ln1ARU_l78BVW8IBtRhGh6l1xrns';
   static const String notificationUrl = 'https://fcm.googleapis.com/fcm/send';
-  static const String baseUrl = "http://192.168.1.2:8000";
+  static const String baseUrl = "https://gomeet.tiendev.id.vn";
   static const String baseUrlApi = "$baseUrl/api";
 
 
