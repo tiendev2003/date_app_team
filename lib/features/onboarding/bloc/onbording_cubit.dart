@@ -66,7 +66,8 @@ class OnbordingCubit extends Cubit<OnbordingState> {
       return response.data["Result"];
     } catch (e) {
       if (e is DioException) {
-        emit(ErrorState(e.response?.data["ResponseMsg"] ?? e.message));
+        emit(ErrorState(e.response?.data["ResponseMsg"]));
+        return;
       }
       emit(ErrorState(e.toString()));
       rethrow;

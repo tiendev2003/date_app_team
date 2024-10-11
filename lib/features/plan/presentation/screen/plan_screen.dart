@@ -1,6 +1,7 @@
 import 'package:date_app_team/widget/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/language/localization/app_localization.dart';
@@ -20,6 +21,9 @@ class PlanScreen extends StatefulWidget {
 class _PlanScreenState extends State<PlanScreen> {
   @override
   Widget build(BuildContext context) {
+    final DateFormat dateFormat =
+        DateFormat('dd/MM/yyyy'); // Định dạng ngày tháng mong muốn
+
     return Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         bottomNavigationBar: Padding(
@@ -149,10 +153,8 @@ class _PlanScreenState extends State<PlanScreen> {
                             style: Theme.of(context).textTheme.bodySmall),
                         const Spacer(),
                         Text(
-                            state.homeData.plandata!.planStartDate
-                                .toString()
-                                .split(' ')
-                                .first,
+                            dateFormat.format(DateTime.parse(
+                                state.homeData.plandata!.planStartDate!)),
                             style: Theme.of(context).textTheme.bodyMedium),
                       ]),
                       const SizedBox(
@@ -167,10 +169,8 @@ class _PlanScreenState extends State<PlanScreen> {
                             style: Theme.of(context).textTheme.bodySmall),
                         const Spacer(),
                         Text(
-                            state.homeData.plandata!.planEndDate
-                                .toString()
-                                .split(' ')
-                                .first,
+                            dateFormat.format(DateTime.parse(
+                                state.homeData.plandata!.planEndDate!)),
                             style: Theme.of(context).textTheme.bodyMedium),
                       ]),
                       Divider(
@@ -185,7 +185,7 @@ class _PlanScreenState extends State<PlanScreen> {
                             style: Theme.of(context).textTheme.bodySmall),
                         const Spacer(),
                         Text(
-                            "${Provider.of<HomeProvider>(context, listen: false).currency}${state.homeData.plandata!.amount.toString()}",
+                            "${state.homeData.plandata!.amount.toString()} ${Provider.of<HomeProvider>(context, listen: false).currency}",
                             style: Theme.of(context).textTheme.bodyMedium),
                       ]),
                     ],

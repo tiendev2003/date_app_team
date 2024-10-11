@@ -243,5 +243,7 @@
     "Language": "言語",
     "Blocked Users": "ブロックしたユーザー",
     "Yes, Remove": "はい、削除",
-    "Login": "ログイン"
+    "Login": "ログイン",
+    "Please Enter Valid Email": "有効なメールアドレスを入力してください",
+    "Pay": "支払い"
 }

@@ -69,11 +69,14 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
     onBordingProvider = Provider.of<OnBordingProvider>(context);
     return PopScope(
       canPop: onBordingProvider.stepsCount == 0 ? true : false,
-      onPopInvoked: (b) async {
-        if (onBordingProvider.stepsCount == 0) {
-          await GoogleSignIn().signOut();
-        } else {
-          onBordingProvider.updatestepsCount(onBordingProvider.stepsCount - 1);
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) {
+          if (onBordingProvider.stepsCount == 0) {
+            GoogleSignIn().signOut();
+          } else {
+            onBordingProvider
+                .updatestepsCount(onBordingProvider.stepsCount - 1);
+          }
         }
       },
       child: Scaffold(
@@ -83,6 +86,13 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
                   onBordingProvider.email.text.isNotEmpty &&
                   onBordingProvider.password.text.isNotEmpty &&
                   onBordingProvider.stepsCount == 0) {
+                if (!isValidEmail(onBordingProvider.email.text)) {
+                  Fluttertoast.showToast(
+                      msg: AppLocalizations.of(context)
+                              ?.translate("Please Enter Valid Email") ??
+                          "Please Enter Valid Email");
+                  return;
+                }
                 onBordingProvider.updatestepsCount(1);
               } else if (onBordingProvider.mobileNumber.text.isNotEmpty &&
                   onBordingProvider.stepsCount == 1) {
@@ -156,7 +166,7 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
                         images: onBordingProvider.images,
                         context: context)
                     .then((value) {
-                      log(value.toString());
+                  log(value.toString());
                   Fluttertoast.showToast(msg: value.responseMsg.toString());
                 });
               } else {
@@ -171,35 +181,36 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
                                 ?.translate("Please Enter Name") ??
                             "Please Enter Name");
                   } else if (onBordingProvider.email.text.isEmpty) {
-                    // Fluttertoast.showToast(msg: "Please Enter Email".tr);
                     Fluttertoast.showToast(
                         msg: AppLocalizations.of(context)
                                 ?.translate("Please Enter Email") ??
                             "Please Enter Email");
                   } else if (onBordingProvider.password.text.isEmpty) {
-                    // Fluttertoast.showToast(msg: "Please Enter Password".tr);
                     Fluttertoast.showToast(
                         msg: AppLocalizations.of(context)
                                 ?.translate("Please Enter Password") ??
                             "Please Enter Password");
+                  } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                      .hasMatch(onBordingProvider.email.text)) {
+                    Fluttertoast.showToast(
+                        msg: AppLocalizations.of(context)
+                                ?.translate("Please Enter Valid Email") ??
+                            "Please Enter Valid Email");
                   }
                 } else if (onBordingProvider.mobileNumber.text.isEmpty &&
                     onBordingProvider.stepsCount == 1) {
-                  // Fluttertoast.showToast(msg: "Please Enter MobileNumber".tr);
                   Fluttertoast.showToast(
                       msg: AppLocalizations.of(context)
                               ?.translate("Please Enter MobileNumber") ??
                           "Please Enter MobileNumber");
                 } else if (onBordingProvider.bdatePicker.toString() == "null" &&
                     onBordingProvider.stepsCount == 2) {
-                  // Fluttertoast.showToast(msg: "Please Enter BirthDate".tr);
                   Fluttertoast.showToast(
                       msg: AppLocalizations.of(context)
                               ?.translate("Please Enter BirthDate") ??
                           "Please Enter BirthDate");
                 } else if (onBordingProvider.select < 0 &&
                     onBordingProvider.stepsCount == 3) {
-                  // Fluttertoast.showToast(msg: "Please Select Gender".tr);
                   Fluttertoast.showToast(
                       msg: AppLocalizations.of(context)
                               ?.translate("Please Select Gender") ??
@@ -207,48 +218,41 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
                 } else if (onBordingProvider.relationGoal < 0 &&
                     onBordingProvider.stepsCount == 4) {
                   Fluttertoast.showToast(
-                      // msg: "Please Select Relationship Goals".tr);
                       msg: AppLocalizations.of(context)
                               ?.translate("Please Select Relationship Goals") ??
                           "Please Select Relationship Goals");
                 } else if (onBordingProvider.kmCounter < 10 &&
                     onBordingProvider.stepsCount == 5) {
-                  // Fluttertoast.showToast(msg: "Please Select Nearby".tr);
                   Fluttertoast.showToast(
                       msg: AppLocalizations.of(context)
                               ?.translate("Please Select Nearby") ??
                           "Please Select Nearby");
                 } else if (onBordingProvider.selectHobi.length <= 5 &&
                     onBordingProvider.stepsCount == 6) {
-                  // Fluttertoast.showToast(msg: "Please Select Hobies".tr);
                   Fluttertoast.showToast(
                       msg: AppLocalizations.of(context)
                               ?.translate("Please Select Hobies") ??
                           "Please Select Hobies");
                 } else if (onBordingProvider.selectedLanguage.isNotEmpty &&
                     onBordingProvider.stepsCount == 7) {
-                  // Fluttertoast.showToast(msg: "Please Select Language".tr);
                   Fluttertoast.showToast(
                       msg: AppLocalizations.of(context)
                               ?.translate("Please Select Language") ??
                           "Please Select Language");
                 } else if (onBordingProvider.selectReligion < 0 &&
                     onBordingProvider.stepsCount == 8) {
-                  // Fluttertoast.showToast(msg: "Please Select Religion".tr);
                   Fluttertoast.showToast(
                       msg: AppLocalizations.of(context)
                               ?.translate("Please Select Religion") ??
                           "Please Select Religion");
                 } else if (onBordingProvider.select1 < 0 &&
                     onBordingProvider.stepsCount == 9) {
-                  // Fluttertoast.showToast(msg: "Please Select Gender".tr);
                   Fluttertoast.showToast(
                       msg: AppLocalizations.of(context)
                               ?.translate("Please Select Gender") ??
                           "Please Select Gender");
                 } else if (onBordingProvider.stepsCount == 10 &&
                     onBordingProvider.images.length < 3) {
-                  // Fluttertoast.showToast(msg: "Please Select Minimum 3 Images".tr);
                   Fluttertoast.showToast(
                       msg: AppLocalizations.of(context)
                               ?.translate("Please Select Minimum 3 Images") ??
@@ -273,7 +277,23 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
                 children: [
                   Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                     onBordingProvider.stepsCount == 0
-                        ? const SizedBox()
+                        ? InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: SvgPicture.asset(
+                              "assets/icons/BackIcon.svg",
+                              height: 25,
+                              width: 25,
+                              colorFilter: ColorFilter.mode(
+                                  Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium
+                                          ?.color ??
+                                      Colors.black,
+                                  BlendMode.srcIn),
+                            ),
+                          )
                         : InkWell(
                             onTap: () {
                               onBordingProvider.updatestepsCount(
@@ -403,9 +423,8 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
             const SizBoxH(size: 0.018),
             TextFieldPro(
               controller: onBordingProvider.name,
-              // hintText: "Frist Name".tr,
-              hintText: AppLocalizations.of(context)?.translate("Name") ??
-                  "Name",
+              hintText:
+                  AppLocalizations.of(context)?.translate("Name") ?? "Name",
               onChangee: (e) {
                 onBordingProvider.updateNameFiled(
                     controller: onBordingProvider.name, value: e);
@@ -418,7 +437,6 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
             const SizBoxH(size: 0.018),
             TextFieldPro(
               controller: onBordingProvider.email,
-              // hintText: "Email".tr,
               hintText:
                   AppLocalizations.of(context)?.translate("Email") ?? "Email",
               readOnly: onBordingProvider.isEmailEdite,
@@ -434,7 +452,6 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
             const SizBoxH(size: 0.018),
             TextFieldPro(
               controller: onBordingProvider.password,
-              // hintText: "Password".tr,
               hintText: AppLocalizations.of(context)?.translate("Password") ??
                   "Password",
               onChangee: (e) {
@@ -450,22 +467,13 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
                   ? "assets/icons/eye-slash.svg"
                   : "assets/icons/eye.svg",
             ),
-            // const SizBoxH(size: 0.018),
-            // TextFieldPro(
-            //   controller: onBordingProvider.referelCode,
-            //   hintText: "ReferelCode",
-            //   onChangee: (e) {
-            //     onBordingProvider.updateNameFiled(
-            //         controller: onBordingProvider.referelCode, value: e);
-            //   },
-            //   textalingn: TextAlign.start,
-            // ),
             const SizBoxH(size: 0.018),
             TextFieldPro(
               controller: onBordingProvider.bio,
               // hintText: "Bio".tr,
               hintText: AppLocalizations.of(context)?.translate("Bio") ?? "Bio",
               maxline: 10,
+              minline: 3,
               onChangee: (e) {
                 onBordingProvider.updateNameFiled(
                     controller: onBordingProvider.bio, value: e);
@@ -970,7 +978,7 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
                                   width: 5,
                                 ),
                                 Image.network(
-                                  "${Config.baseUrl}${data.img}",
+                                  "${Config.baseUrl}/${data.img}",
                                   height: 24,
                                   width: 24,
                                 )
@@ -982,16 +990,17 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
                   ],
                 )
               : onBordingProvider.searchForHobie.isEmpty
-                  ?   SizedBox(
-                    child: Center(
-                      child: Text(
-                        // "No Data Found".tr,
-                        AppLocalizations.of(context)?.translate("No Data Found") ??
-                            "No Data Found",
-                        style: Theme.of(context).textTheme.bodyMedium,
+                  ? SizedBox(
+                      child: Center(
+                        child: Text(
+                          // "No Data Found".tr,
+                          AppLocalizations.of(context)
+                                  ?.translate("No Data Found") ??
+                              "No Data Found",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
                       ),
-                    ),
-                  )
+                    )
                   : Wrap(
                       spacing: 13,
                       runSpacing: 13,
@@ -1048,7 +1057,7 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
                                       width: 5,
                                     ),
                                     Image.network(
-                                      "${Config.baseUrl}${data.img}",
+                                      "${Config.baseUrl}/${data.img}",
                                       height: 24,
                                       width: 24,
                                     )
@@ -1161,7 +1170,7 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
                           child: Row(
                             children: [
                               Image.network(
-                                "${Config.baseUrl}${data.img}",
+                                "${Config.baseUrl}/${data.img}",
                                 height: 50,
                                 width: 50,
                               ),
@@ -1428,7 +1437,10 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(data.title.toString(),
+                                    Text(
+                                        AppLocalizations.of(context)?.translate(
+                                                data.title.toString()) ??
+                                            data.title.toString(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall!
@@ -1542,12 +1554,6 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
               child: InkWell(
                 onTap: () async {
                   onBordingProvider.pickupImage(0);
-                  // if (images.isEmpty) {
-                  //   final XFile? image =
-                  //       await picker.pickImage(source: ImageSource.gallery);
-                  //   images.add(image!);
-                  //   setState(() {});
-                  // }
                 },
                 child: Stack(
                   alignment: Alignment.topRight,
@@ -2007,5 +2013,12 @@ class _CreateStepScreenState extends State<CreateStepScreen> {
         ],
       ),
     );
+  }
+
+  bool isValidEmail(String email) {
+    final RegExp emailRegExp = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+    return emailRegExp.hasMatch(email);
   }
 }

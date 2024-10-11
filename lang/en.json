@@ -248,5 +248,7 @@
   "Language" : "Language",
   "Blocked Users" : "Blocked Users",
   "Yes, Remove" : "Yes, Remove",
-  "Login" : "Login"
+  "Login" : "Login",
+  "Please Enter Valid Email" : "Please Enter Valid Email",
+  "Pay" : "Payment"
 }

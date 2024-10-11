@@ -17,11 +17,11 @@ import 'package:date_app_team/core/model/religion_model.dart';
 import 'package:date_app_team/core/model/user_model.dart';
 import 'package:date_app_team/core/theme/ui.dart';
 import 'package:date_app_team/features/chatting/bloc/chatting_provider.dart';
+import 'package:date_app_team/features/edit_profile/bloc/editprofile_provider.dart';
 import 'package:date_app_team/features/home/bloc/home_cubit.dart';
 import 'package:date_app_team/features/map/data/models/map_model.dart';
 import 'package:date_app_team/features/notification/data/model/notification_model.dart';
 import 'package:date_app_team/features/onboarding/bloc/onbording_provider.dart';
-import 'package:date_app_team/features/edit_profile/bloc/editprofile_provider.dart';
 import 'package:date_app_team/widget/main_button.dart';
 import 'package:date_app_team/widget/size_box_custom.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
- 
+import '../../../main.dart';
 
 class HomeProvider extends ChangeNotifier {
   List flotingIcons = [
@@ -55,11 +55,7 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // 72764 65975 - gold
-  // 99984 64304 - silver
-  // 37373 73737 - basic
-  // 43210 98768 - basic
-  // 10101 01010 - basic
+ 
 
   bool isShowDialog = false;
   late UserModel userlocalData;
@@ -358,7 +354,6 @@ class HomeProvider extends ChangeNotifier {
 
   CarouselSliderController carouselController = CarouselSliderController();
 
-
   upDateCurrentindex(int value) {
     currentIndex = value;
     notifyListeners();
@@ -558,10 +553,9 @@ class HomeProvider extends ChangeNotifier {
                                     long: long.toString(),
                                     context: context)
                                 .then((value) {
-                              Navigator.pop(context);
+                              Navigator.pop(navigatorKey.currentContext!);
                               filterRadius = 0;
                               ageRangeValues = const RangeValues(16, 40);
-                              // List searchPref = ["Man", "Woman", "Both"];
                               searchPreference = -1;
                               selectRelationShip = -1;
                               selectReligion = -1;
@@ -603,7 +597,7 @@ class HomeProvider extends ChangeNotifier {
                                       uid: uid,
                                       isverify: selectverfy.toString())
                                   .then((value) {
-                                Navigator.pop(context);
+                                Navigator.pop(navigatorKey.currentContext!);
                               });
                             },
                           ),
@@ -657,8 +651,7 @@ class HomeProvider extends ChangeNotifier {
                                   text: filterRadius.toStringAsFixed(2),
                                   style: Theme.of(context).textTheme.bodySmall,
                                 ),
-                                // TextSpan(text: " KM".tr,style: Theme.of(context).textTheme.bodySmall,),
-                                TextSpan(
+                                 TextSpan(
                                   text: AppLocalizations.of(context)
                                           ?.translate(" KM") ??
                                       " KM",

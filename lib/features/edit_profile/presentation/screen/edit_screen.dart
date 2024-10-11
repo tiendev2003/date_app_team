@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'package:date_app_team/core/config/config.dart';
 import 'package:date_app_team/core/language/localization/app_localization.dart';
 import 'package:date_app_team/core/model/interest_model.dart';
@@ -13,6 +12,7 @@ import 'package:date_app_team/features/edit_profile/bloc/editprofile_provider.da
 import 'package:date_app_team/features/edit_profile/bloc/editprofile_state.dart';
 import 'package:date_app_team/features/home/bloc/home_provier.dart';
 import 'package:date_app_team/features/onboarding/bloc/onbording_cubit.dart';
+import 'package:date_app_team/main.dart';
 import 'package:date_app_team/widget/back_button.dart';
 import 'package:date_app_team/widget/main_button.dart';
 import 'package:date_app_team/widget/size_box_custom.dart';
@@ -47,19 +47,19 @@ class _EditScreenState extends State<EditScreen> {
     editProvider.dataTransfer(context);
     BlocProvider.of<OnbordingCubit>(context).religionApi().then((value) {
       editProvider.valuInReligion(value.religionlist!);
-      BlocProvider.of<OnbordingCubit>(context)
+      BlocProvider.of<OnbordingCubit>(navigatorKey.currentContext!)
           .relationGoalListApi()
           .then((value) {
         editProvider.valuInrelationShip(value.goallist!);
-        BlocProvider.of<OnbordingCubit>(context)
+        BlocProvider.of<OnbordingCubit>(navigatorKey.currentContext!)
             .languagelistApi()
             .then((value) {
           editProvider.valuInLanguage(value.languagelist!);
-          BlocProvider.of<OnbordingCubit>(context)
+          BlocProvider.of<OnbordingCubit>(navigatorKey.currentContext!)
               .getInterestApi()
               .then((value) {
             editProvider.valuInIntrest(value.interestlist!);
-            BlocProvider.of<EditProfileCubit>(context).compeltDataTransfer();
+            BlocProvider.of<EditProfileCubit>(navigatorKey.currentContext!).compeltDataTransfer();
           });
         });
       });
@@ -101,10 +101,10 @@ class _EditScreenState extends State<EditScreen> {
                           ccode: editProvider.ccode)
                       .then((value) {
                     if (value == "true") {
-                      BlocProvider.of<EditProfileCubit>(context).sendOtpFunction(
+                      BlocProvider.of<EditProfileCubit>(navigatorKey.currentContext!).sendOtpFunction(
                           number:
                               "+${editProvider.ccode} ${editProvider.mobileNumber.text}",
-                          context: context);
+                          context: navigatorKey.currentContext!);
                     }
                   });
                 } else {

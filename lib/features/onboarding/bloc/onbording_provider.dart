@@ -20,6 +20,8 @@ import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../main.dart';
+
 class OnBordingProvider with ChangeNotifier {
   final name = TextEditingController();
   final email = TextEditingController();
@@ -165,7 +167,9 @@ class OnBordingProvider with ChangeNotifier {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("Awesome",
+                    Text(AppLocalizations.of(context)
+                                  ?.translate("Awesome") ??
+                              "Awesome",
                         style: Theme.of(context).textTheme.headlineSmall),
                     const SizedBox(height: 5),
                     RichText(
@@ -220,18 +224,18 @@ class OnBordingProvider with ChangeNotifier {
                               .then((value) {
                             if (value.user != null) {
                               if (isForgot) {
-                                Navigator.pop(context);
-                                newPassWord(context, mobileNumber.text, ccode);
+                                Navigator.pop(navigatorKey.currentContext!);
+                                newPassWord(navigatorKey.currentContext!, mobileNumber.text, ccode);
                               } else {
                                 updatestepsCount(2);
-                                Navigator.pop(context);
+                                Navigator.pop(navigatorKey.currentContext!);
                               }
                             }
                           });
                         } catch (e) {
                           // Fluttertoast.showToast(msg: "OTP Invalid".tr);
                           Fluttertoast.showToast(
-                              msg: AppLocalizations.of(context)
+                              msg: AppLocalizations.of(navigatorKey.currentContext!)
                                       ?.translate("OTP Invalid") ??
                                   "OTP Invalid");
                         }

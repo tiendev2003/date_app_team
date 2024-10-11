@@ -18,8 +18,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:vnpay_flutter/vnpay_flutter.dart';
 
-
-
 class PremiumScreen extends StatefulWidget {
   const PremiumScreen({super.key});
 
@@ -78,7 +76,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                           ? AppColors.borderColor
                           : AppColors.appColor,
                       title:
-                          "FROM ${Provider.of<HomeProvider>(context, listen: false).currency}${premiumProvider.selectedPlanPrice}",
+                          "${AppLocalizations.of(context)?.translate("Pay") ?? "Pay"} ${premiumProvider.selectedPlanPrice} ${Provider.of<HomeProvider>(context, listen: false).currency}",
                       onTap: () {
                         if (premiumProvider.selectedPlan > 0) {
                           state1.homeData.planId ==
@@ -122,9 +120,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
                                                             .selectedPayment ==
                                                         3) {
                                                       final paymentUrl =
-                                                      VNPAYFlutter.instance.generatePaymentUrl(
-
-                                                      url:
+                                                          VNPAYFlutter.instance
+                                                              .generatePaymentUrl(
+                                                        url:
                                                             'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html',
 
                                                         version: '2.0.1',
@@ -150,25 +148,31 @@ class _PremiumScreenState extends State<PremiumScreen> {
                                                             '13NZGTEYJKQ36F2BPFB5RWWYCCR0QRP1',
 
                                                         vnPayHashType:
-                                                        VNPayHashType
-                                                            .HMACSHA512, vnpayExpireDate: DateTime.now().add(const Duration(hours: 1)),
-                                                        
+                                                            VNPayHashType
+                                                                .HMACSHA512,
+                                                        vnpayExpireDate:
+                                                            DateTime.now().add(
+                                                                const Duration(
+                                                                    hours: 1)),
                                                       );
-                                                      await   VNPAYFlutter.instance.show(
-                                                          paymentUrl: paymentUrl,
-                                                          onPaymentSuccess: (params) {
-
-                                                            log(params.toString());
-                                                          }, //on mobile transaction success
-                                                          onPaymentError: (params) {
-
-                                                            log(params.toString());
-                                                          }, //on mobile transaction error
-                                                          onWebPaymentComplete: () {
-
-                                                          } //only use in web
-                                                      );
-
+                                                      await VNPAYFlutter
+                                                          .instance
+                                                          .show(
+                                                              paymentUrl:
+                                                                  paymentUrl,
+                                                              onPaymentSuccess:
+                                                                  (params) {
+                                                                log(params
+                                                                    .toString());
+                                                              }, //on mobile transaction success
+                                                              onPaymentError:
+                                                                  (params) {
+                                                                log(params
+                                                                    .toString());
+                                                              }, //on mobile transaction error
+                                                              onWebPaymentComplete:
+                                                                  () {} //only use in web
+                                                              );
                                                     }
                                                   },
                                                 ),

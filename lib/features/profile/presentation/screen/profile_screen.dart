@@ -14,7 +14,6 @@ import 'package:date_app_team/features/language/bloc/language_cubit.dart';
 import 'package:date_app_team/features/onboarding/bloc/onbording_provider.dart';
 import 'package:date_app_team/features/profile/bloc/profile_provider.dart';
 import 'package:date_app_team/features/profile/presentation/screen/loream_screen.dart';
-import 'package:date_app_team/features/profile/presentation/screen/profile_privacy_screen.dart';
 import 'package:date_app_team/features/theme/bloc/lite_dark_cubit.dart';
 import 'package:date_app_team/main.dart';
 import 'package:date_app_team/widget/app_bar_custom.dart';
@@ -503,7 +502,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                                             12,
                                                                       )),
                                                                     ),
-                                                                    // title: Transform.translate(offset: const Offset(-10, -3),child: Text("Prep your lighting".tr,style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 18,fontWeight: FontWeight.bold),)),
                                                                     title: Transform
                                                                         .translate(
                                                                             offset: const Offset(-10,
@@ -576,7 +574,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                                               const SizedBox(
                                                                                 width: 5,
                                                                               ),
-                                                                              // Flexible(child: Text("Turn up your brightness".tr,style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 16,color: Colors.grey,),maxLines: 2,))
                                                                               Flexible(
                                                                                   child: Text(
                                                                                 AppLocalizations.of(context)?.translate("Turn up your brightness") ?? "Turn up your brightness",
@@ -790,7 +787,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                                                               const SizedBox(
                                                                                                 height: 10,
                                                                                               ),
-                                                                                              // Center(child: Text("Get ready for".tr,style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 24,fontWeight: FontWeight.bold))),
+
                                                                                               Center(child: Text(AppLocalizations.of(context)?.translate("Get ready for") ?? "Get ready for", style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 24, fontWeight: FontWeight.bold))),
                                                                                               // Center(child: Text("your image selfie".tr,style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 24,fontWeight: FontWeight.bold))),
                                                                                               Center(child: Text(AppLocalizations.of(context)?.translate("your image selfie") ?? "your image selfie", style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 24, fontWeight: FontWeight.bold))),
@@ -1291,21 +1288,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               : ListTile(
                                   onTap: () async {
                                     if (i == 0) {
-                                      Navigator.pushNamed(context, "/editPage");
+                                      Navigator.pushNamed(
+                                          context, "/editScreen");
                                     } else if (i == 3) {
-                                      Navigator.pushNamed(context, "/faqPage");
+                                      Navigator.pushNamed(
+                                          context, "/faqScreen");
                                     } else if (i == 4) {
-                                      profileProvider
-                                          .blocklistaApi(context)
-                                          .then((value) {
-                                        Navigator.push(
-                                            navigatorKey.currentContext!,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ProfilePrivacyScreen(),
-                                            ));
-                                        setState(() {});
-                                      });
+                                      Navigator.pushNamed(
+                                          context, "/profilePrivacyScreen");
                                     } else if (i == 5) {
                                       showModalBottomSheet(
                                         context: context,
@@ -1547,7 +1537,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ),
                                   ),
-                                  // title: Text("${profileProvider.menuList[i]["title"]}", style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: profileProvider.menuList[i]["iconShow"] == "0" ? Colors.red : null),),
                                   title: Text(
                                     AppLocalizations.of(context)?.translate(
                                             "${profileProvider.menuList[i]["title"]}") ??

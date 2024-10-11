@@ -4,7 +4,9 @@ import 'package:date_app_team/features/edit_profile/presentation/screen/edit_scr
 import 'package:date_app_team/features/onboarding/presentation/screens/onbording_screens.dart';
 import 'package:date_app_team/features/plan/presentation/screen/plan_screen.dart';
 import 'package:date_app_team/features/premium/presentation/screen/premium_screen.dart';
+import 'package:date_app_team/features/profile/presentation/screen/block_screen.dart';
 import 'package:date_app_team/features/profile/presentation/screen/faq_screen.dart';
+import 'package:date_app_team/features/profile/presentation/screen/profile_privacy_screen.dart';
 import 'package:date_app_team/features/splash/presentation/screens/splash_screen.dart';
 import 'package:date_app_team/features/step_account/presentation/screens/create_step_screen.dart';
 import 'package:date_app_team/widget/bottom_bar.dart';
@@ -31,14 +33,18 @@ class Routes {
         return CupertinoPageRoute(builder: (_) => const LoginScreen());
       case "/bottombar":
         return CupertinoPageRoute(builder: (_) => const BottomBar());
-      case "/faqPage":
+      case "/faqScreen":
         return CupertinoPageRoute(builder: (_) => const FaqScreen());
-      case "/editPage":
+      case "/editScreen":
         return CupertinoPageRoute(builder: (_) => const EditScreen());
       case "/planScreen":
         return CupertinoPageRoute(builder: (_) => const PlanScreen());
       case "/premiumScreen":
         return CupertinoPageRoute(builder: (_) => const PremiumScreen());
+      case "/profilePrivacyScreen":
+        return CupertinoPageRoute(builder: (_) => const ProfilePrivacyScreen());
+      case "/blockScreen":
+        return CupertinoPageRoute(builder: (_) => const BlockScreen());
 
       default:
         return CupertinoPageRoute(builder: (_) => Container());

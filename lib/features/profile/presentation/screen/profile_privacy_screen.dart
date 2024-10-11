@@ -1,6 +1,5 @@
 import 'package:date_app_team/core/language/localization/app_localization.dart';
 import 'package:date_app_team/features/profile/bloc/profile_provider.dart';
-import 'package:date_app_team/features/profile/presentation/screen/block_screen.dart';
 import 'package:date_app_team/widget/back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -53,11 +52,7 @@ class _ProfilePrivacyScreenState extends State<ProfilePrivacyScreen> {
                   children: [
                     ListTile(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const BlockScreen(),
-                            ));
+                          Navigator.pushNamed(context, "/blockScreen");
                       },
                       contentPadding: EdgeInsets.zero,
                       title: Padding(
@@ -69,8 +64,6 @@ class _ProfilePrivacyScreenState extends State<ProfilePrivacyScreen> {
                                 .bodyMedium!
                                 .copyWith(fontWeight: FontWeight.bold)),
                       ),
-
-                      // subtitle: Text('The people you blocked are displayed here.'.tr,style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.grey,fontSize: 14)),
                       subtitle: Text(
                           AppLocalizations.of(context)?.translate(
                                   "The people you blocked are displayed here.") ??
@@ -83,8 +76,6 @@ class _ProfilePrivacyScreenState extends State<ProfilePrivacyScreen> {
                         "assets/icons/Arrow - Right 2.svg",
                         colorFilter: ColorFilter.mode(
                             Theme.of(context).indicatorColor, BlendMode.srcIn),
-                        // height: 25,
-                        // width: 25,
                       ),
                     ),
                   ],

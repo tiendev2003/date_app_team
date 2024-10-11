@@ -1,5 +1,3 @@
- 
-
 import 'dart:convert';
 
 UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
@@ -20,18 +18,20 @@ class UserModel {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-    userLogin: json["UserLogin"] == null ? null : UserLogin.fromJson(json["UserLogin"]),
-    responseCode: json["ResponseCode"],
-    result: json["Result"],
-    responseMsg: json["ResponseMsg"],
-  );
+        userLogin: json["UserLogin"] == null
+            ? null
+            : UserLogin.fromJson(json["UserLogin"]),
+        responseCode: json["ResponseCode"],
+        result: json["Result"],
+        responseMsg: json["ResponseMsg"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "UserLogin": userLogin?.toJson(),
-    "ResponseCode": responseCode,
-    "Result": result,
-    "ResponseMsg": responseMsg,
-  };
+        "UserLogin": userLogin?.toJson(),
+        "ResponseCode": responseCode,
+        "Result": result,
+        "ResponseMsg": responseMsg,
+      };
 }
 
 class UserLogin {
@@ -65,7 +65,7 @@ class UserLogin {
   String? isSubscribe;
   String? historyId;
   String? height;
-  dynamic identityPicture;
+  String? identityPicture;
   String? isVerify;
 
   UserLogin({
@@ -104,72 +104,79 @@ class UserLogin {
   });
 
   factory UserLogin.fromJson(Map<String, dynamic> json) => UserLogin(
-    id: json["id"].toString(),
-    name: json["name"],
-    mobile: json  ["mobile"],
-    password: json["password"],
-    rdate: json["rdate"] == null ? null : DateTime.parse(json["rdate"]),
-    status: json["status"].toString(),
-    ccode: json["ccode"].toString(),
-    code: json["code"].toString(),
-    refercode: json["refercode"].toString(),
-    wallet: json["wallet"].toString(),
-    email: json["email"],
-    gender: json["gender"],
-    lats: json["lats"],
-    longs: json["longs"],
-    profileBio: json["profile_bio"],
-    profilePic: json["profile_pic"],
-    birthDate: json["birth_date"] == null ? null : DateTime.parse(json["birth_date"]),
-    searchPreference: json["search_preference"],
-    radiusSearch: json["radius_search"],
-    relationGoal: json["relation_goal"].toString(),
-    interest: json["interest"],
-    language: json["language"],
-    religion: json["religion"].toString(),
-    otherPic: json["other_pic"],
-    planId: json["plan_id"].toString(),
-    planStartDate: json["plan_start_date"] == null ? null : DateTime.parse(json["plan_start_date"]),
-    planEndDate: json["plan_end_date"] == null ? null : DateTime.parse(json["plan_end_date"]),
-    isSubscribe: json["is_subscribe"].toString(),
-    historyId: json["history_id"].toString(),
-    height: json["height"],
-    identityPicture: json["identity_picture"],
-    isVerify: json["is_verify"].toString(),
-  );
+        id: json["id"].toString(),
+        name: json["name"],
+        mobile: json["mobile"],
+        password: json["password"],
+        rdate: json["rdate"] == null ? null : DateTime.parse(json["rdate"]),
+        status: json["status"].toString(),
+        ccode: json["ccode"].toString(),
+        code: json["code"].toString(),
+        refercode: json["refercode"].toString(),
+        wallet: json["wallet"].toString(),
+        email: json["email"],
+        gender: json["gender"],
+        lats: json["lats"],
+        longs: json["longs"],
+        profileBio: json["profile_bio"],
+        profilePic: json["profile_pic"],
+        birthDate: json["birth_date"] == null
+            ? null
+            : DateTime.parse(json["birth_date"]),
+        searchPreference: json["search_preference"],
+        radiusSearch: json["radius_search"],
+        relationGoal: json["relation_goal"].toString(),
+        interest: json["interest"],
+        language: json["language"],
+        religion: json["religion"].toString(),
+        otherPic: json["other_pic"],
+        planId: json["plan_id"].toString(),
+        planStartDate: json["plan_start_date"] == null
+            ? null
+            : DateTime.parse(json["plan_start_date"]),
+        planEndDate: json["plan_end_date"] == null
+            ? null
+            : DateTime.parse(json["plan_end_date"]),
+        isSubscribe: json["is_subscribe"].toString(),
+        historyId: json["history_id"].toString(),
+        height: json["height"],
+        identityPicture: json["identity_picture"] ?? "",
+        isVerify: json["is_verify"].toString(),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "mobile": mobile,
-    "password": password,
-    "rdate": rdate?.toIso8601String(),
-    "status": status,
-    "ccode": ccode,
-    "code": code,
-    "refercode": refercode,
-    "wallet": wallet,
-    "email": email,
-    "gender": gender,
-    "lats": lats,
-    "longs": longs,
-    "profile_bio": profileBio,
-    "profile_pic": profilePic,
-    "birth_date": "${birthDate!.year.toString().padLeft(4, '0')}-${birthDate!.month.toString().padLeft(2, '0')}-${birthDate!.day.toString().padLeft(2, '0')}",
-    "search_preference": searchPreference,
-    "radius_search": radiusSearch,
-    "relation_goal": relationGoal,
-    "interest": interest,
-    "language": language,
-    "religion": religion,
-    "other_pic": otherPic,
-    "plan_id": planId,
-    "plan_start_date": planStartDate?.toIso8601String(),
-    "plan_end_date": planEndDate?.toIso8601String(),
-    "is_subscribe": isSubscribe,
-    "history_id": historyId,
-    "height": height,
-    "identity_picture": identityPicture,
-    "is_verify": isVerify,
-  };
+        "id": id,
+        "name": name,
+        "mobile": mobile,
+        "password": password,
+        "rdate": rdate?.toIso8601String(),
+        "status": status,
+        "ccode": ccode,
+        "code": code,
+        "refercode": refercode,
+        "wallet": wallet,
+        "email": email,
+        "gender": gender,
+        "lats": lats,
+        "longs": longs,
+        "profile_bio": profileBio,
+        "profile_pic": profilePic,
+        "birth_date":
+            "${birthDate!.year.toString().padLeft(4, '0')}-${birthDate!.month.toString().padLeft(2, '0')}-${birthDate!.day.toString().padLeft(2, '0')}",
+        "search_preference": searchPreference,
+        "radius_search": radiusSearch,
+        "relation_goal": relationGoal,
+        "interest": interest,
+        "language": language,
+        "religion": religion,
+        "other_pic": otherPic,
+        "plan_id": planId,
+        "plan_start_date": planStartDate?.toIso8601String(),
+        "plan_end_date": planEndDate?.toIso8601String(),
+        "is_subscribe": isSubscribe,
+        "history_id": historyId,
+        "height": height,
+        "identity_picture": identityPicture,
+        "is_verify": isVerify,
+      };
 }

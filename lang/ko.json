@@ -163,7 +163,7 @@
     "Join Our Membership Today!": "오늘 회원이 되세요!",
     "Enjoy  premium and match anywhere.": "프리미엄을 즐기며 어디서나 매칭하세요.",
     "Checkout GoMeet Premium": "GoMeet 프리미엄 확인",
-     "Go": "이동",
+    "Go": "이동",
     "Profile & Privacy": "프로필 및 개인정보 보호",
     "The people you blocked are displayed here.": "차단한 사람들이 여기에 표시됩니다.",
     "Push Notifications (4)": "푸시 알림 (4)",
@@ -248,5 +248,7 @@
     "Language": "언어",
     "Blocked Users": "차단된 사용자",
     "Yes, Remove": "예, 제거",
-    "Login": "로그인"
+    "Login": "로그인",
+    "Please Enter Valid Email": "유효한 이메일을 입력하세요",
+    "Pay": "지불"
 }

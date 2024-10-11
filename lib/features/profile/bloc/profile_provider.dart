@@ -314,7 +314,7 @@ class ProfileProvider extends ChangeNotifier {
     try {
       var response = await _api.sendRequest
           .post("${Config.baseUrlApi}${Config.pro_pic}", data: formData);
-      print(" + + + + + + + + : ---------  ${response.data}");
+      log(" + + + + + + + + : ---------  ${response.data}");
       if (response.statusCode == 200) {
         Profilepickimage.fromJson(response.data);
         if (response.data["Result"] == "true") {
@@ -327,7 +327,6 @@ class ProfileProvider extends ChangeNotifier {
         }
       } else {
         Fluttertoast.showToast(msg: "Something went Wrong....!!!");
-        // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Something went Wrong....!!!")));
       }
     } catch (e) {
       if (e is DioException) {
@@ -338,8 +337,6 @@ class ProfileProvider extends ChangeNotifier {
       }
     }
   }
-
-  // identidoc pic api
 
   late IdentiDoc identiDoc;
 
@@ -352,7 +349,7 @@ class ProfileProvider extends ChangeNotifier {
     try {
       var response = await _api.sendRequest
           .post("${Config.baseUrlApi}${Config.identifyapi}", data: data);
-      print(" + + + + + + + + : ---------  ${response.data}");
+      log(" + + + + + + + + : ---------  ${response.data}");
       if (response.statusCode == 200) {
         IdentiDoc.fromJson(response.data);
         if (response.data["Result"] == "true") {
@@ -369,7 +366,6 @@ class ProfileProvider extends ChangeNotifier {
             msg: AppLocalizations.of(context)
                     ?.translate("Something went Wrong....!!!") ??
                 "Something went Wrong....!!!");
-        // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Something went Wrong....!!!")));
       }
     } catch (e) {
       if (e is DioException) {
@@ -392,13 +388,10 @@ class ProfileProvider extends ChangeNotifier {
     try {
       var response = await _api.sendRequest
           .post("${Config.baseUrlApi}${Config.unblockapikey}", data: data);
-      print(" + + + + + + + + : ---------  ${response.data}");
+      log(" + + + + + + + + : ---------  ${response.data}");
       if (response.statusCode == 200) {
         UnBlockApi.fromJson(response.data);
         if (response.data["Result"] == "true") {
-          // Preferences.saveUserDetails(response.data);
-          // Provider.of<HomeProvider>(context,listen: false).localData(context);
-          // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BottomBar()), (route) => false);
           Fluttertoast.showToast(msg: response.data["ResponseMsg"]);
           notifyListeners();
         } else {
@@ -410,41 +403,11 @@ class ProfileProvider extends ChangeNotifier {
             msg: AppLocalizations.of(context)
                     ?.translate("Something went Wrong....!!!") ??
                 "Something went Wrong....!!!");
-        // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Something went Wrong....!!!")));
       }
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     }
   }
-
-  // secound api
-
-  // Profilepickimage? profilepickimage;
-  // bool Loading =true;
-  // Future proImage(uid, image) async {
-  //   Map body = {
-  //     "uid" : uid,
-  //     "img": image,
-  //   };
-  //   try {
-  //     var response = await http.post(Uri.parse(Config.baseUrl + Config.proImage),
-  //         body: jsonEncode(body),
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         });
-  //     if (response.statusCode == 200) {
-  //       setState(()  {
-  //         proImageModal =proImageModalFromJson(response.body);
-  //         Loading=false;
-  //       });
-  //       SharedPreferences preferences = await SharedPreferences.getInstance();
-  //       preferences.setString('UserLogin', jsonEncode(proImageModal!.userLogin));
-  //       preferences.setString('profilePic', networkImage);
-  //       var data = jsonDecode(response.body.toString());
-  //       return data;
-  //     } else {}
-  //   } catch (e) {}
-  // }
 }
 
 Future<dynamic> isUserLogOut(String uid) async {

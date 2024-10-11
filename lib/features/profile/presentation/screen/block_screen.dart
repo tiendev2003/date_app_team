@@ -1,9 +1,11 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:date_app_team/core/config/config.dart';
 import 'package:date_app_team/core/language/localization/app_localization.dart';
 import 'package:date_app_team/core/theme/ui.dart';
 import 'package:date_app_team/features/profile/bloc/profile_provider.dart';
+import 'package:date_app_team/main.dart';
 import 'package:date_app_team/widget/back_button.dart';
 import 'package:date_app_team/widget/main_button.dart';
 import 'package:flutter/material.dart';
@@ -47,339 +49,317 @@ class _BlockScreenState extends State<BlockScreen> {
           ),
         ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body:
-            // profileProvider.isLoading
-            //     ?
-            profileProvider.blocklistApi.blocklist!.isEmpty
-                ? notFoundPage()
-                : SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          GridView.builder(
-                            shrinkWrap: true,
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            itemCount:
-                                profileProvider.blocklistApi.blocklist?.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    mainAxisSpacing: 10,
-                                    crossAxisSpacing: 10,
-                                    mainAxisExtent: 250),
-                            itemBuilder: (context, index) {
-                              return ClipRRect(
-                                borderRadius: const BorderRadius.vertical(
-                                    bottom: Radius.circular(30)),
-                                child: InkWell(
-                                  onTap: () {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      // backgroundColor: Colors.white,
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(15),
-                                              topLeft: Radius.circular(15))),
-                                      builder: (context) {
-                                        return Stack(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.all(15),
-                                              child: SingleChildScrollView(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+        body: profileProvider.blocklistApi.blocklist!.isEmpty
+            ? notFoundPage()
+            : SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      GridView.builder(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        itemCount:
+                            profileProvider.blocklistApi.blocklist?.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
+                                mainAxisExtent: 250),
+                        itemBuilder: (context, index) {
+                          return ClipRRect(
+                            borderRadius: const BorderRadius.vertical(
+                                bottom: Radius.circular(30)),
+                            child: InkWell(
+                              onTap: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(15),
+                                          topLeft: Radius.circular(15))),
+                                  builder: (context) {
+                                    return Stack(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(15),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                    AppLocalizations.of(context)
+                                                            ?.translate(
+                                                                "Unblock ${profileProvider.blocklistApi.blocklist?[index].profileName}?") ??
+                                                        "Unblock ${profileProvider.blocklistApi.blocklist?[index].profileName}?",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .headlineSmall!
+                                                        .copyWith(
+                                                            fontSize: 20)),
+                                                const SizedBox(height: 15),
+                                                Row(
                                                   children: [
-                                                    // Text("From where do you want to take the photo?".tr, style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20)),
-                                                    Text(
-                                                        AppLocalizations.of(
-                                                                    context)
-                                                                ?.translate(
-                                                                    "Unblock ${profileProvider.blocklistApi.blocklist?[index].profileName}?") ??
-                                                            "Unblock ${profileProvider.blocklistApi.blocklist?[index].profileName}?",
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .headlineSmall!
-                                                            .copyWith(
-                                                                fontSize: 20)),
-                                                    const SizedBox(height: 15),
-                                                    Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: OutlinedButton(
-                                                            style: ButtonStyle(
-                                                                side: MaterialStatePropertyAll(
-                                                                    BorderSide(
-                                                                        color: AppColors
-                                                                            .appColor)),
-                                                                elevation:
-                                                                    const MaterialStatePropertyAll(
-                                                                        0),
-                                                                shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                                                    Expanded(
+                                                      child: OutlinedButton(
+                                                        style: ButtonStyle(
+                                                            side: WidgetStatePropertyAll(
+                                                                BorderSide(
+                                                                    color: AppColors
+                                                                        .appColor)),
+                                                            elevation:
+                                                                const WidgetStatePropertyAll(
+                                                                    0),
+                                                            shape: WidgetStatePropertyAll(
+                                                                RoundedRectangleBorder(
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             15))),
-                                                                backgroundColor:
-                                                                    const MaterialStatePropertyAll(
-                                                                        Colors
-                                                                            .white)),
-                                                            onPressed: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                              print(
-                                                                  " + + + + + + + : ------   ${profileProvider.blocklistApi.blocklist?[index].profileId}");
-                                                            },
-                                                            // child: Text('Cancel'.tr,style: TextStyle(color: AppColors.appColor)),
-                                                            child: Text(
-                                                                AppLocalizations.of(
-                                                                            context)
-                                                                        ?.translate(
-                                                                            "Cancel") ??
-                                                                    "Cancel",
-                                                                style: TextStyle(
-                                                                    color: AppColors
-                                                                        .appColor)),
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 8,
-                                                        ),
-                                                        Expanded(
-                                                          child: MainButton(
-                                                              bgColor: AppColors
-                                                                  .appColor,
-                                                              titleColor:
-                                                                  Colors.white,
-                                                              // title: "Unblock".tr,
-                                                              title: AppLocalizations.of(
-                                                                          context)
-                                                                      ?.translate(
-                                                                          "Unblock") ??
-                                                                  "Unblock",
-                                                              onTap: () {
-                                                                profileProvider
-                                                                    .unblockApi(
-                                                                        context:
-                                                                            context,
-                                                                        profileblock:
-                                                                            "${profileProvider.blocklistApi.blocklist?[index].profileId}")
-                                                                    .then(
-                                                                        (value) {
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                  profileProvider
-                                                                      .blocklistaApi(
-                                                                          context);
-                                                                  setState(
-                                                                      () {});
-                                                                });
-                                                              }),
-                                                        ),
-                                                      ],
+                                                            backgroundColor:
+                                                                const WidgetStatePropertyAll(
+                                                                    Colors
+                                                                        .white)),
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                          log(
+                                                              " + + + + + + + : ------   ${profileProvider.blocklistApi.blocklist?[index].profileId}");
+                                                        },
+                                                        child: Text(
+                                                            AppLocalizations.of(
+                                                                        context)
+                                                                    ?.translate(
+                                                                        "Cancel") ??
+                                                                "Cancel",
+                                                            style: TextStyle(
+                                                                color: AppColors
+                                                                    .appColor)),
+                                                      ),
                                                     ),
-                                                    const SizedBox(height: 15),
+                                                    const SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Expanded(
+                                                      child: MainButton(
+                                                          bgColor: AppColors
+                                                              .appColor,
+                                                          titleColor:
+                                                              Colors.white,
+                                                          // title: "Unblock".tr,
+                                                          title: AppLocalizations
+                                                                      .of(
+                                                                          context)
+                                                                  ?.translate(
+                                                                      "Unblock") ??
+                                                              "Unblock",
+                                                          onTap: () {
+                                                            profileProvider
+                                                                .unblockApi(
+                                                                    context:
+                                                                        context,
+                                                                    profileblock:
+                                                                        "${profileProvider.blocklistApi.blocklist?[index].profileId}")
+                                                                .then((value) {
+                                                              Navigator.pop(
+                                                                  navigatorKey
+                                                                      .currentContext!);
+                                                              profileProvider
+                                                                  .blocklistaApi(
+                                                                      navigatorKey
+                                                                          .currentContext!);
+                                                              setState(() {});
+                                                            });
+                                                          }),
+                                                    ),
                                                   ],
                                                 ),
-                                              ),
+                                                const SizedBox(height: 15),
+                                              ],
                                             ),
-                                          ],
-                                        );
-                                      },
+                                          ),
+                                        ),
+                                      ],
                                     );
                                   },
-                                  child: Stack(
-                                    alignment: Alignment.topCenter,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: NetworkImage(
-                                                    "${Config.baseUrl}${profileProvider.blocklistApi.blocklist?[index].profileImages?.first}"),
-                                                fit: BoxFit.cover),
-                                            border: Border.all(
-                                                color: AppColors.appColor,
-                                                width: 4),
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            color: AppColors.greyLight),
-                                      ),
-                                      SvgPicture.asset(
-                                          "assets/Image/Rectangle.svg",
-                                          fit: BoxFit.fitWidth,
-                                          colorFilter: ColorFilter.mode(
-                                              AppColors.appColor
-                                                  .withOpacity(0.8),
-                                              BlendMode.srcIn)),
-                                      Container(
-                                        height: 30,
-                                        width: 80,
-                                        decoration: BoxDecoration(
+                                );
+                              },
+                              child: Stack(
+                                alignment: Alignment.topCenter,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                "${Config.baseUrl}${profileProvider.blocklistApi.blocklist?[index].profileImages?.first}"),
+                                            fit: BoxFit.cover),
+                                        border: Border.all(
                                             color: AppColors.appColor,
+                                            width: 4),
+                                        borderRadius: BorderRadius.circular(30),
+                                        color: AppColors.greyLight),
+                                  ),
+                                  SvgPicture.asset("assets/Image/Rectangle.svg",
+                                      fit: BoxFit.fitWidth,
+                                      colorFilter: ColorFilter.mode(
+                                          AppColors.appColor.withOpacity(0.8),
+                                          BlendMode.srcIn)),
+                                  Container(
+                                    height: 30,
+                                    width: 80,
+                                    decoration: BoxDecoration(
+                                        color: AppColors.appColor,
+                                        borderRadius:
+                                            const BorderRadius.vertical(
+                                                bottom: Radius.circular(15))),
+                                    child: Center(
+                                      child: RichText(
+                                          text: TextSpan(children: [
+                                        TextSpan(
+                                          text:
+                                              "${profileProvider.blocklistApi.blocklist?[index].matchRatio.toString().split(".").first}% ",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall!
+                                              .copyWith(
+                                                  color: AppColors.white,
+                                                  fontSize: 12),
+                                        ),
+                                        TextSpan(
+                                          // text: "Match".tr,
+                                          text: AppLocalizations.of(context)
+                                                  ?.translate("Match") ??
+                                              "Match",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall!
+                                              .copyWith(
+                                                  color: AppColors.white,
+                                                  fontSize: 12),
+                                        ),
+                                      ])),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 80,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 6, horizontal: 12),
+                                        decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.4),
                                             borderRadius:
-                                                const BorderRadius.vertical(
-                                                    bottom:
-                                                        Radius.circular(15))),
-                                        child: Center(
+                                                BorderRadius.circular(20)),
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                              sigmaX: 10, sigmaY: 10),
                                           child: RichText(
                                               text: TextSpan(children: [
                                             TextSpan(
                                               text:
-                                                  "${profileProvider.blocklistApi.blocklist?[index].matchRatio.toString().split(".").first}% ",
+                                                  "${profileProvider.blocklistApi.blocklist?[index].profileDistance} ",
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodySmall!
+                                                  .bodyMedium!
                                                   .copyWith(
-                                                      color: AppColors.white,
+                                                      color: Colors.white,
                                                       fontSize: 12),
                                             ),
                                             TextSpan(
-                                              // text: "Match".tr,
+                                              // text: "Away".tr,
                                               text: AppLocalizations.of(context)
-                                                      ?.translate("Match") ??
-                                                  "Match",
+                                                      ?.translate("Away") ??
+                                                  "Away",
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodySmall!
+                                                  .bodyMedium!
                                                   .copyWith(
-                                                      color: AppColors.white,
+                                                      color: Colors.white,
                                                       fontSize: 12),
                                             ),
                                           ])),
-
-                                          //     Text("${data.matchRatio.toString().split(".").first}% Match",
-                                          //   style: Theme.of(context)
-                                          //       .textTheme
-                                          //       .bodySmall!
-                                          //       .copyWith(color: AppColors.white, fontSize: 12),
-                                          //   )
                                         ),
                                       ),
-                                      Positioned(
-                                        bottom: 80,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 6, horizontal: 12),
-                                            decoration: BoxDecoration(
-                                                color: Colors.white
-                                                    .withOpacity(0.4),
-                                                borderRadius:
-                                                    BorderRadius.circular(20)),
-                                            child: BackdropFilter(
-                                              filter: ImageFilter.blur(
-                                                  sigmaX: 10, sigmaY: 10),
-                                              child: RichText(
-                                                  text: TextSpan(children: [
-                                                TextSpan(
-                                                  text:
-                                                      "${profileProvider.blocklistApi.blocklist?[index].profileDistance} ",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium!
-                                                      .copyWith(
-                                                          color: Colors.white,
-                                                          fontSize: 12),
-                                                ),
-                                                TextSpan(
-                                                  // text: "Away".tr,
-                                                  text: AppLocalizations.of(
-                                                              context)
-                                                          ?.translate("Away") ??
-                                                      "Away",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium!
-                                                      .copyWith(
-                                                          color: Colors.white,
-                                                          fontSize: 12),
-                                                ),
-                                              ])),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        bottom: 0,
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 15),
-                                          child: Column(
-                                            children: [
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Text(
-                                                    "${profileProvider.blocklistApi.blocklist?[index].profileName.toString()},${profileProvider.blocklistApi.blocklist?[index].profileAge}",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyLarge!
-                                                        .copyWith(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight.w800,
-                                                            fontSize: 15),
-                                                    maxLines: 1,
-                                                    overflow:
-                                                        TextOverflow.ellipsis),
-                                              ),
-                                              const SizedBox(
-                                                height: 3,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Text(
-                                                    profileProvider
-                                                        .blocklistApi
-                                                        .blocklist![index]
-                                                        .profileBio
-                                                        .toString()
-                                                        .toUpperCase(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodySmall!
-                                                        .copyWith(
-                                                            color: Colors.white,
-                                                            wordSpacing: 2,
-                                                            fontSize: 12),
-                                                    maxLines: 2,
-                                                    textAlign: TextAlign.center,
-                                                    overflow:
-                                                        TextOverflow.ellipsis),
-                                              ),
-                                              const SizedBox(
-                                                height: 15,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                  )
+                                  Positioned(
+                                    bottom: 0,
+                                    child: Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 2,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15),
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: Text(
+                                                "${profileProvider.blocklistApi.blocklist?[index].profileName.toString()},${profileProvider.blocklistApi.blocklist?[index].profileAge}",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyLarge!
+                                                    .copyWith(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w800,
+                                                        fontSize: 15),
+                                                maxLines: 1,
+                                                overflow:
+                                                    TextOverflow.ellipsis),
+                                          ),
+                                          const SizedBox(
+                                            height: 3,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: Text(
+                                                profileProvider
+                                                    .blocklistApi
+                                                    .blocklist![index]
+                                                    .profileBio
+                                                    .toString()
+                                                    .toUpperCase(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall!
+                                                    .copyWith(
+                                                        color: Colors.white,
+                                                        wordSpacing: 2,
+                                                        fontSize: 12),
+                                                maxLines: 2,
+                                                textAlign: TextAlign.center,
+                                                overflow:
+                                                    TextOverflow.ellipsis),
+                                          ),
+                                          const SizedBox(
+                                            height: 15,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              )
         // : Center(child: CircularProgressIndicator(backgroundColor: AppColors.appColor,)),
         );
   }

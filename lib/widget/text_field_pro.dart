@@ -1,9 +1,9 @@
- 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../core/theme/ui.dart';
+
 class TextFieldPro extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
@@ -19,6 +19,7 @@ class TextFieldPro extends StatelessWidget {
   final void Function()? ontapp;
   final void Function()? surfixOntap;
   final bool? enabledd;
+  final int? minline;
   final Color? svgColor;
   const TextFieldPro(
       {super.key,
@@ -35,17 +36,18 @@ class TextFieldPro extends StatelessWidget {
       this.enabledd,
       this.prefixIconIconPath,
       this.surfixOntap,
-      this.obscureText, this.svgColor});
+      this.obscureText,
+      this.svgColor,
+      this.minline = 1});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
       onTap: ontapp ?? () {},
       maxLines: maxline ?? 1,
       obscureText: obscureText ?? false,
       enabled: enabledd ?? true,
-      minLines: 1,
+      minLines: minline,
       inputFormatters: format ?? [],
       onChanged: onChangee,
       readOnly: readOnly ?? false,
@@ -55,7 +57,7 @@ class TextFieldPro extends StatelessWidget {
       textAlignVertical: TextAlignVertical.center,
       keyboardType: inputType ?? TextInputType.name,
       decoration: InputDecoration(
-        fillColor: Theme.of(context).cardColor,
+          fillColor: Theme.of(context).cardColor,
           filled: true,
           prefixIcon: prefixIconIconPath?.isNotEmpty ?? false
               ? SizedBox(
@@ -66,7 +68,8 @@ class TextFieldPro extends StatelessWidget {
                       prefixIconIconPath!,
                       height: 25,
                       width: 25,
-                      colorFilter: ColorFilter.mode(Theme.of(context).indicatorColor, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(
+                          Theme.of(context).indicatorColor, BlendMode.srcIn),
                     ),
                   ),
                 )
@@ -82,19 +85,36 @@ class TextFieldPro extends StatelessWidget {
                         suffixIconPath!,
                         height: 25,
                         width: 25,
-                        colorFilter: ColorFilter.mode(svgColor ?? Theme.of(context).indicatorColor, BlendMode.srcIn),
-
+                        colorFilter: ColorFilter.mode(
+                            svgColor ?? Theme.of(context).indicatorColor,
+                            BlendMode.srcIn),
                       ),
                     ),
                   ),
                 )
               : null,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12),borderSide: BorderSide(color: Theme.of(context).dividerTheme.color!),),
-          disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12),borderSide: BorderSide(color: Theme.of(context).dividerTheme.color!),),
-          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12),borderSide: BorderSide(color: Theme.of(context).dividerTheme.color!),),
-          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12),borderSide: BorderSide(color: AppColors.appColor),),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide:
+                BorderSide(color: Theme.of(context).dividerTheme.color!),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide:
+                BorderSide(color: Theme.of(context).dividerTheme.color!),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide:
+                BorderSide(color: Theme.of(context).dividerTheme.color!),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: AppColors.appColor),
+          ),
           isDense: true,
-          contentPadding:const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
           hintText: hintText,
           hintStyle: Theme.of(context).textTheme.bodySmall),
     );

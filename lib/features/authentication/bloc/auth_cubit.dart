@@ -42,7 +42,8 @@ class AuthCubit extends Cubit<AuthStates> {
       if (e is DioException) {
         emit(AuthErrorState(e.response?.data["ResponseMsg"] ?? e.message));
       }
-      emit(AuthErrorState(e.toString()));
+       
+      emit(AuthErrorState( "Đăng nhập không thành công" ));
     }
   }
 
