@@ -1,9 +1,8 @@
-import 'package:date_app_team/features/home/presentation/screen/profile_infomation.dart';
+import 'package:date_app_team/features/home/presentation/screen/profile_detail_infomation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../filter_show/screen/filter_show_screen.dart';
-import '../../../notification/screen/notification_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,95 +22,89 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Stack(
-          children: [
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 60,
-                        height: 60,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: const BoxDecoration(shape: BoxShape.circle),
-                        child: Image.network(
-                            'https://picsum.photos/seed/833/600',
-                            fit: BoxFit.cover),
+    return Scaffold(
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 60,
+                      height: 60,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
+                      child: Image.network('https://picsum.photos/seed/833/600',
+                          fit: BoxFit.cover),
+                    ),
+                    const Expanded(
+                        child: Padding(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: Alignment(-1, 0),
+                            child: Text('Hello',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  letterSpacing: 0.0,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ),
+                          Align(
+                            alignment: Alignment(-1, 0),
+                            child: Text('Nguyễn Thành Công',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  letterSpacing: 0.0,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                )),
+                          ),
+                        ],
                       ),
-                      const Expanded(
-                          child: Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Align(
-                              alignment: Alignment(-1, 0),
-                              child: Text('Hello',
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    letterSpacing: 0.0,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            ),
-                            Align(
-                              alignment: Alignment(-1, 0),
-                              child: Text('Nguyễn Thành Công',
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    letterSpacing: 0.0,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                  )),
-                            ),
-                          ],
-                        ),
-                      )),
-                      IconButton(
-                        iconSize: 330,
-                        icon: SvgPicture.asset(
-                          'assets/icons/notificationicon.svg',
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const NotificationScreen(),
-                            ),
-                          );
-                        },
+                    )),
+                    IconButton(
+                      iconSize: 330,
+                      icon: SvgPicture.asset(
+                        'assets/icons/notificationicon.svg',
                       ),
-                      IconButton(
-                        icon: SvgPicture.asset(
-                          'assets/icons/Filter.svg',
-                        ),
-                        onPressed: _filterToggleOverlay,
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          "/notificationScreen",
+                        );
+                      },
+                    ),
+                    IconButton(
+                      icon: SvgPicture.asset(
+                        'assets/icons/Filter.svg',
                       ),
-                    ],
-                  ),
+                      onPressed: _filterToggleOverlay,
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
-                HomeContentBody(),
-              ],
-            ),
-            if (_showFilter) ...[
-              const Opacity(
-                opacity: 0.5,
-                child: ModalBarrier(dismissible: false, color: Colors.black),
               ),
-              FilterShowScreen(onClose: _filterToggleOverlay),
-            ]
-          ],
-        ),
+              const SizedBox(
+                height: 50,
+              ),
+              HomeContentBody(),
+            ],
+          ),
+          if (_showFilter) ...[
+            const Opacity(
+              opacity: 0.5,
+              child: ModalBarrier(dismissible: false, color: Colors.black),
+            ),
+            FilterShowScreen(onClose: _filterToggleOverlay),
+          ]
+        ],
       ),
     );
   }
@@ -134,12 +127,9 @@ class _HomeContentBodyState extends State<HomeContentBody> {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      ProfileDetailInfomation(),
-                ),
+                "/profileInformation",
               );
             },
             child: ClipRRect(

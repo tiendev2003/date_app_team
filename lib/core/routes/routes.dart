@@ -1,6 +1,7 @@
 import 'package:date_app_team/features/authentication/presentation/screens/auth_screen.dart';
 import 'package:date_app_team/features/authentication/presentation/screens/login_screen.dart';
 import 'package:date_app_team/features/edit_profile/presentation/screen/edit_screen.dart';
+import 'package:date_app_team/features/notification/screen/notification_screen.dart';
 import 'package:date_app_team/features/onboarding/presentation/screens/onbording_screens.dart';
 import 'package:date_app_team/features/plan/presentation/screen/plan_screen.dart';
 import 'package:date_app_team/features/premium/presentation/screen/premium_screen.dart';
@@ -11,6 +12,8 @@ import 'package:date_app_team/features/splash/presentation/screens/splash_screen
 import 'package:date_app_team/features/step_account/presentation/screens/create_step_screen.dart';
 import 'package:date_app_team/widget/bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../../features/home/presentation/screen/profile_detail_infomation.dart';
 
 class Routes {
   static Route? onGenerateRoute(RouteSettings settings) {
@@ -45,6 +48,11 @@ class Routes {
         return CupertinoPageRoute(builder: (_) => const ProfilePrivacyScreen());
       case "/blockScreen":
         return CupertinoPageRoute(builder: (_) => const BlockScreen());
+      case "/notificationScreen":
+        return CupertinoPageRoute(builder: (_) => const NotificationScreen());
+      case "/profileInformation":
+        return CupertinoPageRoute(
+            builder: (_) => const ProfileDetailInfomation());
 
       default:
         return CupertinoPageRoute(builder: (_) => Container());

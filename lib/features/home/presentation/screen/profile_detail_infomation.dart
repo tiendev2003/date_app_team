@@ -67,7 +67,7 @@ class _ProfileDetailInfomationState extends State<ProfileDetailInfomation> {
                           child: IconButton(
                             icon: Icon(Icons.close, color: Colors.black),
                             onPressed: () {
-                              Navigator.pushReplacement(
+                              Navigator.pop(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
