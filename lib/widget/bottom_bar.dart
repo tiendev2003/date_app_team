@@ -23,7 +23,6 @@ class _BottomBarState extends State<BottomBar> {
     HomePage(),
     Container(),
     Container(),
-
     Scaffold(
       body: Center(
         child: Text("Chat"),

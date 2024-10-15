@@ -1,3 +1,4 @@
+import 'package:date_app_team/features/home/presentation/screen/profile_infomation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -131,25 +132,36 @@ class _HomeContentBodyState extends State<HomeContentBody> {
       height: 535,
       child: Stack(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(70),
-            child: ShaderMask(
-              shaderCallback: (rect) {
-                return LinearGradient(
-                  begin: Alignment.center,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFF000000).withOpacity(0.0),
-                    Color(0xFF960FFF),
-                  ],
-                ).createShader(rect);
-              },
-              blendMode: BlendMode.srcATop,
-              child: Image.network(
-                'https://picsum.photos/seed/740/600',
-                width: 300,
-                height: 500,
-                fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ProfileDetailInfomation(),
+                ),
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(70),
+              child: ShaderMask(
+                shaderCallback: (rect) {
+                  return LinearGradient(
+                    begin: Alignment.center,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFF000000).withOpacity(0.0),
+                      Color(0xFF960FFF),
+                    ],
+                  ).createShader(rect);
+                },
+                blendMode: BlendMode.srcATop,
+                child: Image.network(
+                  'https://picsum.photos/seed/740/600',
+                  width: 300,
+                  height: 500,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
