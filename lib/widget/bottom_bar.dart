@@ -2,12 +2,13 @@ import 'package:date_app_team/core/theme/ui.dart';
 import 'package:date_app_team/features/home/bloc/home_cubit.dart';
 import 'package:date_app_team/features/home/bloc/home_provier.dart';
 import 'package:date_app_team/features/home/bloc/home_state.dart';
-import 'package:date_app_team/features/home/presentation/screen/home_screen.dart';
 import 'package:date_app_team/features/profile/presentation/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+
+import '../features/home/presentation/screen/home_page.dart';
 
 class BottomBar extends StatefulWidget {
   static const String bottomBarRoute = "/bottomBar";
@@ -19,11 +20,9 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   List pages = [
-    // HomePage(),
-    const HomeScreen(),
+    HomePage(),
     Container(),
     Container(),
-
     Scaffold(
       body: Center(
         child: Text("Chat"),
